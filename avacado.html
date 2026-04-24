@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avocado Toast | Dish Delights</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:"Poppins",sans-serif;background-color:#fffaf8;color:#333;}
+    .top-bar{background:#7c4a8c;color:#fff;text-align:center;padding:8px 0;font-size:14px;}
+    .top-bar a{color:#ffdf6c;font-weight:600;text-decoration:none;margin-left:4px;}
+    header{display:flex;justify-content:space-between;align-items:center;padding:20px 50px;border-bottom:1px solid #eee;flex-wrap:wrap;}
+    .logo{font-family:'Great Vibes',cursive;font-size:60px;color:#e67e22;text-shadow:2px 2px 5px rgba(0,0,0,0.15);}
+    nav{display:flex;gap:30px;}
+    nav a{text-decoration:none;color:#000;font-weight:600;letter-spacing:1px;font-size:14px;position:relative;}
+    nav a:hover{color:#7c4a8c;}
+    nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:#7c4a8c;transition:.3s;}
+    nav a:hover::after{width:100%;}
+    .recipe-container{display:flex;align-items:stretch;justify-content:center;padding:60px 80px;gap:60px;}
+    .recipe-img{flex:1;max-width:45%;border-radius:20px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,.2);}
+    .recipe-img img{width:100%;height:100%;object-fit:cover;border-radius:20px;transition:.5s;}
+    .recipe-img img:hover{transform:scale(1.05);}
+    .recipe-content{flex:1;max-width:50%;background:#fff;border-radius:20px;padding:30px 40px;box-shadow:0 5px 15px rgba(0,0,0,.1);display:flex;flex-direction:column;justify-content:space-between;}
+    .recipe-content h2{color:#7c4a8c;font-size:36px;margin-bottom:15px;}
+    .recipe-content ul{margin-left:20px;margin-bottom:20px;}
+    .recipe-content li{margin-bottom:8px;}
+    .calories{font-weight:600;color:#e67e22;margin-top:10px;}
+    .back-btn{display:inline-block;background:#7c4a8c;color:#fff;text-decoration:none;padding:10px 20px;border-radius:8px;transition:.3s;align-self:flex-start;}
+    .back-btn:hover{background:#9e65a8;}
+    @media(max-width:900px){.recipe-container{flex-direction:column;padding:30px 20px;}.recipe-img,.recipe-content{max-width:100%;}}
+  </style>
+</head>
+<body>
+  <div class="top-bar">💛 OUR RECIPES, YOUR INBOX. <a href="#">SIGN UP</a></div>
+
+  <header>
+    <div class="logo">Dish Delights</div>
+    <nav>
+      <a href="index.html">HOME</a>
+      <a href="#">ABOUT</a>
+      <a href="#" class="active">RECIPES</a>
+      <a href="#">CONTACT</a>
+    </nav>
+  </header>
+
+  <section class="recipe-container">
+    <div class="recipe-img">
+      <img src="https://images.pexels.com/photos/8335336/pexels-photo-8335336.jpeg" alt="Avocado Toast">
+    </div>
+
+    <div class="recipe-content">
+      <div>
+        <h2>Avocado Toast</h2>
+        <p>Creamy avocado mashed on crunchy toast, topped with olive oil, chili flakes, and your favorite toppings — a perfect healthy breakfast!</p>
+
+        <h3>Ingredients:</h3>
+        <ul>
+          <li>2 slices of multigrain bread</li>
+          <li>1 ripe avocado</li>
+          <li>1 tsp olive oil</li>
+          <li>Salt and pepper to taste</li>
+          <li>Chili flakes or lemon juice (optional)</li>
+        </ul>
+
+        <h3>Procedure:</h3>
+        <ul>
+          <li>Toast the bread until golden brown.</li>
+          <li>Mash avocado with salt, pepper, and olive oil.</li>
+          <li>Spread on toast and top with chili flakes or lemon juice.</li>
+          <li>Serve fresh and enjoy!</li>
+        </ul>
+
+        <p class="calories">🔥 Calories: ~250 kcal per serving</p>
+      </div>
+      <a href="index.html" class="back-btn">⬅ Back to Home</a>
+    </div>
+  </section>
+</body>
+</html>

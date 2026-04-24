@@ -1,0 +1,23 @@
+node_modules/
+dist/
+target/
+.DS_Store
+Thumbs.db
+
+# Environment and secrets
+.env
+*.env
+
+# Local databases and generated app data
+*.db
+*.mv.db
+*.trace.db
+data/
+
+# Temporary Office files
+~$*.docx
+~$*.doc
+~$*.pptx
+
+# Raw exported design pages with embedded tokens
+figma_page.html

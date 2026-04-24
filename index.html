@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dish Delights | Recipes</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Poppins',sans-serif;background:#fffaf8;color:#222;line-height:1.45}
+
+    /* Top Bar (unchanged) */
+    .top-bar{background:#7c4a8c;color:#fff;text-align:center;padding:8px 0;font-size:14px}
+    .top-bar label{color:#ffdf6c;font-weight:600;text-decoration:none;margin-left:8px;cursor:pointer}
+
+    /* Header (unchanged) */
+    header{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;border-bottom:1px solid #eee;flex-wrap:wrap;background:white;position:sticky;top:0;z-index:10}
+    .logo{font-family:'Great Vibes',cursive;font-size:64px;color:#e67e22;letter-spacing:1px;opacity:0;transform:translateY(-22px) scale(.98);animation:logoIn 1s cubic-bezier(.2,.9,.3,1) forwards}
+    @keyframes logoIn{to{opacity:1;transform:none}}
+    nav{display:flex;gap:24px;align-items:center}
+    nav a{font-weight:600;text-decoration:none;color:#1f1f1f;letter-spacing:.6px;padding-bottom:6px;position:relative}
+    nav a::after{content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:#7c4a8c;transition:width .25s}
+    nav a:hover::after{width:100%}
+    .search{width:18px;height:18px;border:2px solid #333;border-radius:50%;position:relative}
+    .search::after{content:'';position:absolute;width:2px;height:8px;background:#333;right:-5px;bottom:-2px;transform:rotate(-45deg)}
+
+    .tagline{text-align:center;margin:20px 0 12px;color:#555;font-size:18px}
+    .tagline span{font-family:'Great Vibes',cursive;color:#7c4a8c;font-size:26px}
+
+    /* Recipes hero */
+    .recipes-hero{background:#6a256d;color:#fff;text-align:center;padding:48px 18px 60px;position:relative}
+    .recipes-hero h2{font-size:40px;margin-bottom:8px}
+    .recipes-hero p{max-width:820px;margin:0 auto 18px;opacity:.95}
+    .search-box{display:inline-flex;align-items:center;background:rgba(255,255,255,0.95);border-radius:10px;padding:6px;border:1px solid rgba(255,255,255,0.06)}
+    .search-box input{border:none;padding:10px 14px;min-width:260px;border-radius:8px;font-size:15px;outline:none}
+    .search-box button{border:none;background:#fff;padding:10px 14px;border-radius:8px;font-weight:700;cursor:pointer}
+    .top-rated{background:#fff;color:#333;max-width:760px;margin:18px auto 12px;padding:16px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,0.06)}
+    .top-rated h3{color:#6a256d;margin-bottom:8px}
+    .top-rated ul{margin-left:18px;color:#444;line-height:1.6}
+    .view-all{display:inline-block;margin-top:14px;padding:10px 22px;background:#7c4a8c;color:#fff;border-radius:8px;text-decoration:none;font-weight:700}
+    .hero-deco{position:absolute;right:6%;top:8%;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg, rgba(255,158,251,0.12), rgba(106,37,109,0.12));filter:blur(8px)}
+
+    /* Recipe Grid */
+    .recipe-section{max-width:1120px;margin:60px auto 40px;padding:0 18px;}
+    .recipe-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;}
+    .recipe-card{background:#fff;border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;box-shadow:0 10px 30px rgba(8,12,20,0.06);transition:transform .28s,box-shadow .28s;display:flex;flex-direction:column;}
+    .recipe-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(8,12,20,0.12)}
+    .thumb{height:220px;width:100%;overflow:hidden;position:relative}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+    .recipe-card:hover .thumb img{transform:scale(1.06) rotate(.6deg)}
+    .card-body{padding:18px 16px 22px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+    .card-body h3{color:#2b1b2b;margin:0;font-size:20px;font-family:'Playfair Display', serif}
+    .cal-badge{display:inline-block;background:#e67e22;color:#fff;padding:6px 12px;border-radius:999px;font-weight:700;font-size:13px;box-shadow:0 6px 18px rgba(230,126,34,0.12);margin-top:auto}
+
+    /* Blog Section (unchanged) */
+    .blog-section{background:#f9f6ff;padding:60px 18px;}
+    .blog-container{max-width:1120px;margin:0 auto;text-align:center;}
+    .blog-container h2{font-size:36px;color:#6a256d;margin-bottom:10px;}
+    .blog-container p{color:#555;margin-bottom:40px;max-width:700px;margin-left:auto;margin-right:auto;}
+    .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
+    .blog-card{background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.06);overflow:hidden;text-align:left;transition:transform .3s ease,box-shadow .3s ease;cursor:default;}
+    .blog-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.12);}
+    .blog-card img{width:100%;height:200px;object-fit:cover;}
+    .blog-content{padding:18px;}
+    .blog-content h3{color:#2b1b2b;font-size:20px;margin-bottom:8px;}
+    .blog-content p{color:#555;font-size:15px;margin-bottom:12px;}
+
+    /* Popup (unchanged) */
+    #popup-toggle{display:none}
+    .popup-overlay{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.6);
+      display:none;align-items:center;justify-content:center;
+      z-index:100;
+    }
+    #popup-toggle:checked ~ .popup-overlay{display:flex;}
+    .popup-box{
+      background:#fff;padding:40px;border-radius:12px;
+      width:320px;max-width:90%;
+      text-align:center;position:relative;
+      box-shadow:0 10px 30px rgba(0,0,0,0.3);
+      animation:popIn .4s ease;
+    }
+    @keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+    .popup-box h2{color:#6a256d;margin-bottom:10px;}
+    .popup-box p{color:#000;margin-bottom:20px;}
+    .popup-box input{width:90%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:10px;}
+    .popup-box button{background:#7c4a8c;color:#fff;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-weight:600;}
+    .close-btn{
+      position:absolute;top:10px;right:14px;
+      font-size:20px;color:#000;cursor:pointer;
+    }
+
+    /* Follow section (unchanged) */
+    .follow-section{background:#7c4a8c;color:#fff;text-align:center;padding:36px 20px 28px;margin-top:30px}
+    .follow-row{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:0 18px}
+    .follow-left{display:flex;align-items:center;gap:18px}
+    .social-btn{width:44px;height:44px;border-radius:50%;background:#fff;color:#7c4a8c;display:inline-flex;align-items:center;justify-content:center;font-size:18px;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+
+    /* --- NEW FOOTER (matches image) --- */
+    .main-footer {
+      background: #ffffff;
+      padding: 40px 20px 10px;
+      color: #5d3b52;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+      padding-bottom: 22px;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: #6a256d;
+      margin-bottom: 12px;
+      font-weight: 800;
+    }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; }
+    .footer-col ul li { margin: 10px 0; color: #444; font-size: 15px; }
+    .footer-col ul li a { color: inherit; text-decoration: none; }
+    .footer-col ul li a:hover { color: #7c4a8c; }
+
+    /* Signup box like image (purple background with form) */
+    .signup-box {
+      background: #6a3b52;
+      color: #fff;
+      padding: 20px;
+      border-radius: 2px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .signup-box h3 { font-family:'Great Vibes',cursive; font-size:28px; margin:0; color:#fff; }
+    .signup-box p { margin:0;color:rgba(255,255,255,0.85) }
+    .signup-form { display:flex; gap:8px; margin-top:12px; width:100%; }
+    .signup-form input[type="text"], .signup-form input[type="email"] {
+      padding:12px; border: 1px solid rgba(0,0,0,0.08); border-radius:2px; flex:1;
+    }
+    .signup-form button { background:#e5b95e; border:none; padding:12px 18px; border-radius:2px; font-weight:700; cursor:pointer; }
+
+    .footer-bottom {
+      max-width: 1120px;
+      margin: 22px auto 0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding: 20px 0;
+    }
+
+    .footer-socials {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .footer-socials a { width:44px; height:44px; border-radius:50%; background:#6a256d; display:inline-flex; align-items:center; justify-content:center; color:#fff; text-decoration:none; font-size:18px; box-shadow:0 8px 20px rgba(0,0,0,0.06); }
+    .footer-logo { font-family:'Great Vibes',cursive; font-size:36px; color:#7c4a8c; opacity:0.95; }
+    .footer-right-links { text-align:right; color:#666; font-size:14px; }
+    .footer-right-links a { color:#666; text-decoration:none; margin-left:12px; }
+    .footer-right-links a:hover { text-decoration:underline; }
+
+    /* Fixed heart button (right side) */
+    .fixed-heart {
+      position: fixed;
+      right: 18px;
+      bottom: 60px;
+      z-index: 999;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      cursor:pointer;
+    }
+    .fixed-heart .heart-inner {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #7c4a8c;
+      color: #7c4a8c;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:20px;
+    }
+
+    /* tiny text under heart (like image) */
+    .fixed-heart .heart-label {
+      position: absolute;
+      right: 70px;
+      top: 8px;
+      font-size:12px;
+      color:#7c4a8c;
+      transform: translateY(-6px);
+    }
+
+    @media(max-width:900px){
+      .footer-inner{grid-template-columns:1fr; text-align:left}
+      .footer-bottom{flex-direction:column;align-items:flex-start;gap:12px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden checkbox trigger -->
+  <input type="checkbox" id="popup-toggle" />
+
+  <!-- Top bar (unchanged) -->
+  <div class="top-bar">💛 OUR RECIPES, YOUR INBOX. <label for="popup-toggle">SIGN UP</label></div>
+
+  <!-- Popup (unchanged) -->
+  <div class="popup-overlay">
+    <div class="popup-box">
+      <label for="popup-toggle" class="close-btn">&times;</label>
+      <h2>Join Dish Delights!</h2>
+      <p>Get exclusive recipes, tips, and updates straight to your inbox.</p>
+      <input type="email" placeholder="Enter your email" />
+      <button>Subscribe</button>
+    </div>
+  </div>
+
+  <!-- Header (unchanged) -->
+  <header>
+    <div class="logo">Dish Delights</div>
+    <nav>
+      <a href="#">HOME</a>
+      <a href="#">ABOUT</a>
+      <a href="#">RECIPES</a>
+      <a href="#">CONTACT</a>
+      <div class="search"></div>
+    </nav>
+  </header>
+
+  <div class="tagline">SIMPLE RECIPES MADE FOR <span>real, actual, everyday life.</span></div>
+
+  <!-- Hero (unchanged) -->
+  <section class="recipes-hero">
+    <div class="hero-deco"></div>
+    <h2>Recipes</h2>
+    <p>We’ve organized these recipes every way we could think of so you don’t have to! Browse, click, and enjoy — each recipe opens with ingredients and steps.</p>
+    <div class="search-box"><input placeholder="Search here"><button>🔍</button></div>
+    <div class="top-rated">
+      <h3>⭐ Top Rated Recipes</h3>
+      <ul type="none"><li>Spaghetti Carbonara</li><li>Chicken Caesar Salad</li><li>Avocado Toast</li></ul>
+    </div>
+    <a class="view-all" href="#recipes">+ VIEW ALL RECIPES</a>
+  </section>
+
+  <!-- Recipe Grid (unchanged) -->
+  <section class="recipe-section" id="recipes">
+    <div class="recipe-grid">
+      <a class="recipe-card" href="carbonara.html"><div class="thumb"><img src="https://www.themealdb.com/images/media/meals/llcbn01574260722.jpg" alt="Carbonara"></div><div class="card-body"><h3>Spaghetti Carbonara</h3><span class="cal-badge">580 kcal</span></div></a>
+
+      <a class="recipe-card" href="pancakes.html"><div class="thumb"><img src="https://www.themealdb.com/images/media/meals/rwuyqx1511383174.jpg" alt="Pancakes"></div><div class="card-body"><h3>Fluffy Pancakes</h3><span class="cal-badge">350 kcal</span></div></a>
+
+      <a class="recipe-card" href="butterchicken.html"><div class="thumb"><img src="https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg" alt="Butter Chicken"></div><div class="card-body"><h3>Butter Chicken</h3><span class="cal-badge">640 kcal</span></div></a>
+
+      <a class="recipe-card" href="chickensalad.html"><div class="thumb"><img src="https://images.pexels.com/photos/26341207/pexels-photo-26341207.jpeg" alt="Chicken Caesar Salad"></div><div class="card-body"><h3>Chicken Caesar Salad</h3><span class="cal-badge">280 kcal</span></div></a>
+
+      <a class="recipe-card" href="brownies.html"><div class="thumb"><img src="https://images.pexels.com/photos/3026804/pexels-photo-3026804.jpeg" alt="Brownies"></div><div class="card-body"><h3>Fudgy Brownies</h3><span class="cal-badge">450 kcal</span></div></a>
+
+      <a class="recipe-card" href="avocado.html"><div class="thumb"><img src="https://images.pexels.com/photos/3872372/pexels-photo-3872372.jpeg" alt="Avocado Toast"></div><div class="card-body"><h3>Avocado Toast</h3><span class="cal-badge">230 kcal</span></div></a>
+
+      <a class="recipe-card" href="vegfry.html"><div class="thumb"><img src="https://images.pexels.com/photos/4768953/pexels-photo-4768953.jpeg" alt="Veggie Stir Fry"></div><div class="card-body"><h3>Veggie Stir Fry</h3><span class="cal-badge">300 kcal</span></div></a>
+
+      <a class="recipe-card" href="shrimp.html"><div class="thumb"><img src="https://images.pexels.com/photos/20923043/pexels-photo-20923043.jpeg" alt="Garlic Butter Shrimp"></div><div class="card-body"><h3>Garlic Butter Shrimp</h3><span class="cal-badge">410 kcal</span></div></a>
+    </div>
+  </section>
+
+  <!-- Blog Section (unchanged) -->
+  <section class="blog-section">
+    <div class="blog-container">
+      <h2>From Our Food Blog</h2>
+      <p>Read our chef’s tips, behind-the-scenes stories, and creative ideas for home cooking inspiration.</p>
+      <div class="blog-grid">
+        <div class="blog-card"><img src="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg" alt=""><div class="blog-content"><h3>5 Easy Meal Prep Tips</h3><p>Simple and smart prep techniques that save your time during the week.</p></div></div>
+        <div class="blog-card"><img src="https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg" alt=""><div class="blog-content"><h3>Healthy Cooking Made Simple</h3><p>Balance taste and nutrition with easy, accessible ingredients.</p></div></div>
+        <div class="blog-card"><img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg" alt=""><div class="blog-content"><h3>Desserts You Can’t Resist</h3><p>From fudgy brownies to cheesecakes, find indulgent desserts that everyone will love.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Follow Us (unchanged) -->
+  <section class="follow-section">
+    <div class="follow-row">
+      <div class="follow-left">
+        <h4 style="color:#fff;margin:0 6px 0 0;font-weight:700">FOLLOW US</h4>
+        <a class="social-btn" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a class="social-btn" href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+        <a class="social-btn" href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a class="social-btn" href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a class="social-btn" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- === REPLACED FOOTER: matches screenshot layout (only footer changed) === -->
+  <footer class="main-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Dish Delights</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Recipe Index</a></li>
+          <li><a href="#">Blogging Resources</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Food & Recipes</h4>
+        <ul>
+          <li><a href="#">Sugar Free January</a></li>
+          <li><a href="#">Freezer Meals 101</a></li>
+          <li><a href="#">Quick and Easy Recipes</a></li>
+          <li><a href="#">Instant Pot Recipes</a></li>
+          <li><a href="#">Pasta Recipes</a></li>
+          <li><a href="#">Vegan Recipes</a></li>
+          <li><a href="#">Soup Recipes</a></li>
+          <li><a href="#">Taco Recipes</a></li>
+          <li><a href="#">Meal Prep Recipes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col signup">
+        <div class="signup-box" aria-label="Signup box">
+          <h3>signup <span style="font-size:14px;vertical-align:middle">for email updates</span></h3>
+          <p style="margin-top:6px;">Get a free eCookbook with our top recipes.</p>
+          <form class="signup-form" action="#" method="post" onsubmit="return false;">
+            <input type="text" placeholder="First Name" required />
+            <input type="email" placeholder="Email" required />
+            <button type="submit">GO</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-socials" aria-hidden="false">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+
+      <div style="text-align:center;">
+        <div class="footer-logo">Dish Delights</div>
+      </div>
+
+      <div class="footer-right-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+
+    <p class="copyright" style="margin-top:14px">© 2025 Dish Delights. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Fixed heart button on right -->
+  <div class="fixed-heart" aria-label="like">
+    <div class="heart-inner"><i class="fa-regular fa-heart" aria-hidden="true"></i></div>
+  </div>
+
+  <!--  popup -->
+  <script>
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){
+        const checkbox = document.getElementById('popup-toggle');
+        if(checkbox) checkbox.checked = false;
+      }
+    });
+
+  </script>
+</body>
+</html>

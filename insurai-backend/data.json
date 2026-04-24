@@ -1,0 +1,93 @@
+{
+  "users": [
+    {
+      "id": "u_admin",
+      "email": "admin@insurai.com",
+      "passwordHash": "plain:admin123"
+    }
+  ],
+  "policies": [
+    {
+      "id": "POL-2024-001",
+      "holder": "Sarah Johnson",
+      "type": "Life Insurance",
+      "premium": "$450/mo",
+      "coverage": "$500,000",
+      "status": "Active",
+      "riskScore": "3.2/10",
+      "aiRecommendation": "Standard"
+    },
+    {
+      "id": "POL-2024-002",
+      "holder": "Michael Chen",
+      "type": "Health Insurance",
+      "premium": "$380/mo",
+      "coverage": "$250,000",
+      "status": "Active",
+      "riskScore": "2.8/10",
+      "aiRecommendation": "Preferred"
+    },
+    {
+      "id": "POL-2026-5PGG",
+      "holder": "MODHAKA",
+      "type": "HEALTH",
+      "premium": "45000",
+      "coverage": "--",
+      "status": "Active",
+      "riskScore": "--",
+      "aiRecommendation": "--"
+    },
+    {
+      "id": "POL-2026-EXJS",
+      "holder": "modhaka",
+      "type": "Life Insurance",
+      "premium": "45,000",
+      "coverage": "45000",
+      "status": "Active",
+      "riskScore": "--",
+      "aiRecommendation": "Preferred"
+    }
+  ],
+  "claims": [
+    {
+      "id": "CL-2024-2847",
+      "claimant": "Sarah Johnson",
+      "type": "Health",
+      "amount": "$12,500",
+      "status": "Approved",
+      "aiConfidence": "95%",
+      "submitted": "2026-02-28",
+      "processing": "2-3 days"
+    },
+    {
+      "id": "CL-2024-2848",
+      "claimant": "Michael Chen",
+      "type": "Auto",
+      "amount": "$8,750",
+      "status": "Pending",
+      "aiConfidence": "88%",
+      "submitted": "2026-03-05",
+      "processing": "Under review"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "name": "medical_report_johnson.pdf",
+      "category": "Medical Record",
+      "size": "2.4 MB",
+      "timestamp": "2026-03-07 09:23",
+      "status": "Processed",
+      "confidence": "98%"
+    },
+    {
+      "id": "DOC-002",
+      "name": "accident_report_chen.jpg",
+      "category": "Accident Report",
+      "size": "1.8 MB",
+      "timestamp": "2026-03-07 10:15",
+      "status": "Processing",
+      "confidence": "--"
+    }
+  ]
+}
