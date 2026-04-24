@@ -21,3 +21,17 @@ data/
 
 # Raw exported design pages with embedded tokens
 figma_page.html
+
+# Unrelated local HTML practice files
+abc.html
+avacado.html
+brownies.html
+butterchicken.html
+carbonara.html
+chickensalad.html
+index.html
+insure.html
+pancakes.html
+shrimp.html
+vegfry.html
+package-lock.json
